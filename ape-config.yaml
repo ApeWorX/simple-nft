@@ -1,2 +1,9 @@
 plugins:
-  ape-solidity: 0.1.0-alpha.2
+  - name: solidity
+
+dependencies:
+  open_zeppelin: OpenZeppelin/openzeppelin-contracts@4.4.0
+
+solidity:
+  import_remapping:
+    - "@openzeppelin=open_zeppelin/contracts"
