@@ -1,5 +1,5 @@
 plugins:
-  ape-solidity: 0.1.0-alpha.3
+  - name: solidity
 
 dependencies:
   open_zeppelin: OpenZeppelin/openzeppelin-contracts@4.4.0
