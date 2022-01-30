@@ -8,5 +8,3 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ApeWorX/github-action@main
-    - name: Run Tests
-      run: ape test
