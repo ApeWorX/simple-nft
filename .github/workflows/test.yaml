@@ -4,8 +4,9 @@ name: Test
 
 jobs:
   functional:
-    runs-on: ApeWorX/github-action@main
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: ApeWorX/github-action@main
     - name: Run Tests
       run: ape test
