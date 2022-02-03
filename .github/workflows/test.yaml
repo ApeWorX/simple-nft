@@ -8,3 +8,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ApeWorX/github-action@main
+
+    - name: Cache compiler installations
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.solcx
+          ~/.vvm/vyper-*
+        key: ${{ runner.os }}-compiler-cache
