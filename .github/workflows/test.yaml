@@ -14,5 +14,12 @@ jobs:
           /home/runner/work/_temp/_github_home/.vvm/vyper-*
         key: ${{ runner.os }}-compiler-cache
 
+    - name: Cache build installations
+      uses: actions/cache@v2
+      with:
+        path: |
+          /home/runner/work/_temp/_github_home/.build
+        key: ${{ runner.os }}-build-cache
+
     - uses: actions/checkout@v2
     - uses: ApeWorX/github-action@main
