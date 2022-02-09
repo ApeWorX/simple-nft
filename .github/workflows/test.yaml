@@ -10,6 +10,7 @@ jobs:
     - uses: sabotagebeats/github-action@feat/caching
       with:
         python-version: '3.9'
+        ape-plugins-list: 'solidity vyper'
     - run: ape compile --size
       shell: bash
     - run: ape test -s
