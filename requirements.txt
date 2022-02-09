@@ -1,2 +1,0 @@
-eth-ape>=0.1.0b4
-black
