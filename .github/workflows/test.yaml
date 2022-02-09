@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: sabotagebeats/github-action@feat/caching
+    - uses: sabotagebeats/github-action@feat/requirements
       with:
         python-version: '3.9'
     - run: ape compile --size
