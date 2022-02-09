@@ -10,6 +10,7 @@ jobs:
     - uses: sabotagebeats/github-action@feat/caching
       with:
         python-version: '3.9'
+        ape-version-pin: '==0.1.0b4'
     - run: ape compile --size
       shell: bash
     - run: ape test -s
