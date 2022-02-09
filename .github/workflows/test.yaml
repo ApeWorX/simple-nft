@@ -8,6 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: sabotagebeats/github-action@feat/caching
+    - run: sudo find | grep \.build
+      shell: bash
     - run: ape compile --size
       shell: bash
     - run: ape test -s
