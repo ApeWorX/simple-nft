@@ -8,6 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: sabotagebeats/github-action@feat/caching
+      with:
+        python-version: '3.9'
     - run: ape compile --size
       shell: bash
     - run: ape test -s
