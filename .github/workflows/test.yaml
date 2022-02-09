@@ -10,7 +10,7 @@ jobs:
     - uses: sabotagebeats/github-action@feat/caching
     - run: ape compile --size
       shell: bash
-    - run: sudo find | grep "\.build"
+    - run: sudo find / | grep "\.build"
       shell: bash
     - run: ape test -s
       shell: bash
