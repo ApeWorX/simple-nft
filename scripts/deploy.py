@@ -1,6 +1,6 @@
 from readline import append_history_file
 import click
-from ape.cli import network_option
+from ape.cli import network_option, NetworkBoundCommand
 from ape import project
 from ape import accounts
 from trie import smt
@@ -16,20 +16,17 @@ def assets():
     ... # Upload all assets and generated JSON files from `scripts/data` here
 
 
-@cli.command()
+@cli.command(cls=NetworkBoundCommand)
 @network_option()
 @click.argument("artist", ...)  # `AddressType`
 def nft(network, artist):
-    with networks.ethereum.mainnet.use_provider(network):
-        a = accounts.load(artist)
-        piece = artist.deploy(project.ApePiece)
+    a = accounts.load(artist)
+    piece = artist.deploy(project.ApePiece)
 
 
-@cli.command()
+@cli.command(cls=NetworkBoundCommand)
 @network_option()
 def auction(network):
-    with networks.ethereum.mainnet.use_provider(network):
-        pass
     ... # `BuyApe.vy` deploy process to `network` here
 
 
@@ -41,5 +38,5 @@ def merkle_root(filename):
     tree = smt.SparseMerkleTree(20, FALSE_NODE)
     for address in addresses:
         tree.set(to_bytes(hexstr=address), TRUE_NODE)
-    return tree.root_hash
+    return tree
     # calculate merkle root with input file here
