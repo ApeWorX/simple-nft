@@ -95,8 +95,11 @@ idToApprovals: HashMap[uint256, address]
 # @dev Mapping from owner address to mapping of operator addresses.
 isApprovedForAll: public(HashMap[address, HashMap[address, bool]])
 
-# @dev Address of minter, who can mint a token
-minter: address
+# @dev Set of addresses who can mint a token
+is_minter: public(HashMap[address,bool])
+
+# @dev Owner address who can call only owner functions
+owner: public(address)
 
 # @dev Name of the ERC721 token
 TOKEN_NAME: constant(String[8]) = "ApePiece"
@@ -147,7 +150,8 @@ def __init__(artist: address, baseURI: String[56]):
     self.artist = artist
 
     # ERC-721 functions
-    self.minter = msg.sender
+    self.minter[msg.sender] = True
+    self.owner = msg.sender
     self.baseURI = baseURI
 
     # ERC712 domain separator for ERC4494
@@ -254,9 +258,13 @@ def tokenURI(tokenId: uint256) -> String[63]:
 
 @external
 def updateBaseURI(baseURI: String[56]):
-    assert msg.sender == self.minter
+    assert msg.sender == self.owner
     self.baseURI = baseURI
 
+@external
+def updateOwner(owner:address):
+    assert msg.sender == self.owner
+    self.owner = owner
 
 @view
 @external
@@ -501,8 +509,8 @@ def setMinter(minter: address):
          Throws if `msg.sender` is not the minter.
     @param minter The address that will become the new minter
     """
-    assert msg.sender == self.minter
-    self.minter = minter
+    assert msg.sender == self.owner
+    self.is_minter[minter] = True
 
 
 @internal
@@ -521,7 +529,7 @@ def mint(receiver: address) -> bool:
     @return A boolean that indicates if the operation was successful.
     """
     # Throws if `msg.sender` is not the minter
-    assert msg.sender == self.minter
+    assert self.is_minter[msg.sender]
 
     # Throws if `receiver` is zero address
     assert receiver != ZERO_ADDRESS
