@@ -308,7 +308,6 @@ def _transferFrom(owner: address, receiver: address, tokenId: uint256, sender: a
     assert self._isApprovedOrOwner(sender, tokenId)
     assert receiver != ZERO_ADDRESS
     assert owner != ZERO_ADDRESS
-    assert self.ownerOf[tokenId] == owner
 
     # Reset approvals, if any
     if self.idToApprovals[tokenId] != ZERO_ADDRESS:
